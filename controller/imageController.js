@@ -26,16 +26,14 @@ const getImageById = async (req, res) => {
 };
 
 const deleteImage = async (req, res) => {
-    try {
+
         const id = req.params.id;
         const image = await imageService.deleteImageById(id);
         res.json({
             message: 'Image deleted successfully!',
             deletedImage: image
         });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+   
 };
 
 module.exports = {
