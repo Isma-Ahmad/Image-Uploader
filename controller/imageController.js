@@ -9,6 +9,7 @@ const uploadImage = async (req, res) => {
         }
         const image = await imageService.uploadImage(filePath);
         res.json({message: 'Image uploaded successfully!'});
+        return image;
    
 };
 
