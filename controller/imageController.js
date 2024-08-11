@@ -29,10 +29,7 @@ const deleteImage = async (req, res) => {
 
         const id = req.params.id;
         const image = await imageService.deleteImageById(id);
-        res.json({
-            message: 'Image deleted successfully!',
-            deletedImage: image
-        });
+        res.json({ message: 'Image deleted successfully!'});
    
 };
 
