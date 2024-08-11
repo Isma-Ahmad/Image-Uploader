@@ -5,7 +5,7 @@ const uploadImage = async (req, res) => {
     try {
         const filePath = req.file.path;
         if (!filePath) {
-            throw new Error('No file uploaded');
+            throw new Error('No image uploaded');
         }
         const image = await imageService.uploadImage(filePath);
         res.json({
