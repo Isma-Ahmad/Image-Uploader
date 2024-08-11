@@ -28,7 +28,23 @@ const getImageById = async (id) => {
     }
 };
 
+const deleteImageById = async (id) => {
+    try {
+        const image = await Image.findByPk(id);
+        if (!image) {
+            throw new Error('Image not found');
+        }
+
+        await image.destroy();
+        return image;
+    } catch (error) {
+        throw new Error('Error deleting image: ' + error.message);
+    }
+};
+
+
 module.exports = {
     uploadImage,
-    getImageById
+    getImageById,
+    deleteImageById
 };
