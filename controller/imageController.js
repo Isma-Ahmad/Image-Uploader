@@ -8,10 +8,7 @@ const uploadImage = async (req, res) => {
             throw new Error('No image uploaded');
         }
         const image = await imageService.uploadImage(filePath);
-        res.json({
-            message: 'Image uploaded successfully!',
-            dbRecord: image
-        });
+        res.json({message: 'Image uploaded successfully!'});
    
 };
 
