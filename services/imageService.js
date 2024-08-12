@@ -1,7 +1,6 @@
 const { Image } = require('../models/index');
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 
 
 const storage = multer.diskStorage({
