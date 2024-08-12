@@ -1,38 +1,38 @@
-const imageService = require('../services/imageService');
+const imageService= require('../services/imageService');
 
 
 const uploadImage = async (req, res) => {
   
-        const filePath = req.file.path;
-        if (!filePath) {
-            throw new Error('No image uploaded');
-        }
-        const image = await imageService.uploadImage(filePath);
-        res.json({message: 'Image uploaded successfully!'});
-        return image;
+imageService.uploadImageMiddleware(req, res, async (err) => {
+            if (err) {
+                return res.status(500).send('Error uploading image');
+            }
+                const imagePath = req.file.filename; 
+                const image = await imageService.saveImage(imagePath); 
+                res.status(200).json({ message: 'Image uploaded successfully', image });
+           
+        });
    
 };
 
-const getImageById = async (req, res) => {
+
+const getImage = async (req, res) => {
  
-        const id = req.params.id;
-        const image = await imageService.getImageById(id);
-        const imageData = image.image;
-        res.setHeader('Content-Type', 'image/jpeg'); 
-        res.send(imageData); 
+        const image = await imageService.getImageById(req.params.id);
+        res.status(200).json(image);
    
 };
 
-const deleteImage = async (req, res) => {
 
-        const id = req.params.id;
-        const image = await imageService.deleteImageById(id);
-        res.json({ message: 'Image deleted successfully!'});
+const deleteImageById = async (req, res) => {
+ 
+        await imageService.deleteImage(req.params.id);
+        res.status(200).send('Image deleted successfully');
    
 };
 
-module.exports = {
-    uploadImage,
-    getImageById,
-    deleteImage
+module.exports = { 
+        uploadImage,
+        getImage,
+        deleteImageById 
 };

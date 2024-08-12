@@ -3,9 +3,11 @@ const app = express();
 const PORT = 2000;
 const { sequelize } = require('./models/index'); 
 const imageRoutes = require('./routes/imageRoutes');
+const path = require('path');
 
 app.use(express.json());
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', imageRoutes);
 
